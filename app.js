@@ -1,3 +1,8 @@
+import {ModelViewerElement} from './model-viewer.min.js';
+
+// Allow lower rendering resolution on slower GPUs while interacting.
+ModelViewerElement.minimumRenderScale = 0.25;
+
 const viewer = document.querySelector('#shield');
 const steelButton = document.querySelector('#steel');
 const bronzeButton = document.querySelector('#bronze');
@@ -9,7 +14,8 @@ const state = {steel: false, bronze: false, normal: true};
 viewer.addEventListener('progress', event => {
   document.querySelector('#progress-fill').style.width = `${Math.round(event.detail.totalProgress * 100)}%`;
 });
-viewer.addEventListener('load', () => {
+function setupMaterials() {
+  if (!viewer.model || steel) return;
   steel = viewer.model.materials.find(m => m.name === 'Acero');
   bronze = viewer.model.materials.find(m => m.name === 'Bronce');
   if (!steel || !bronze) { showError(); return; }
@@ -19,7 +25,9 @@ viewer.addEventListener('load', () => {
   for (const button of [steelButton, bronzeButton, normalButton]) button.disabled = false;
   // The baked maps remain bound. These factors multiply their PBR values.
   bronze.pbrMetallicRoughness.setRoughnessFactor(.7);
-});
+}
+viewer.addEventListener('load', setupMaterials);
+if (viewer.loaded) setupMaterials();
 function showError() {
   document.querySelector('#load-error').hidden = false;
   document.querySelector('#load-label').textContent = 'ERROR DE CARGA';
