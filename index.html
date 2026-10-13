@@ -3,48 +3,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#141513">
-  <meta name="description" content="Explora un escudo medieval en 3D: madera carmesí, acero, bronce y cuero. Cambia sus materiales en tiempo real.">
-  <title>El León Carmesí · Arsenal</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="Explora un escudo medieval en 3D y personaliza sus materiales en tiempo real.">
+  <title>Escudo medieval · Visor 3D</title>
+  <link rel="stylesheet" href="styles.css?v=3">
   <script type="module" src="app.js?v=2"></script>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="./" aria-label="Arsenal, inicio"><span class="crest" aria-hidden="true">A</span> ARSENAL <span class="brand-sub">ESTUDIO DE OBJETOS</span></a><span class="edition">COLECCIÓN MEDIEVAL <span>—</span> 001</span></header>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Visor 3D, inicio"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M12 3 20 6v6c0 4-5 7-8 9-3-2-8-5-8-9V6l8-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7v9" stroke="currentColor" stroke-width="1.6"/></svg>Visor 3D</a>
+    <span class="header-note">Proyecto de modelado</span>
+  </header>
   <main>
-    <section class="hero" aria-labelledby="title">
-      <div class="story">
-        <p class="eyebrow"><span></span> ESCUDO HERÁLDICO / ESTUDIO 3D</p>
-        <h1 id="title">El León<br><em>Carmesí.</em></h1>
-        <p class="intro">Madera roja, acero forjado y un león de bronce. Una interpretación del escudo medieval, hecha para explorar desde cualquier ángulo.</p>
-        <div class="divider"></div>
-        <div class="control-heading"><h2>Hazlo tuyo</h2><span>ACABADOS EN TIEMPO REAL</span></div>
+    <div class="page-heading"><div><p class="eyebrow">EL LEÓN CARMESÍ</p><h1>Escudo medieval</h1></div><p>Explora el modelo. Prueba sus acabados.</p></div>
+    <section class="workspace" aria-label="Visor y materiales del escudo">
+      <div class="exhibit">
+        <div class="stage-label"><span>Vista 3D</span><span class="live-dot" id="load-label" role="status">CARGANDO</span></div>
+        <model-viewer id="shield" src="escudo.glb?v=2" poster="poster.webp" alt="Escudo medieval de madera roja con borde de acero, león de bronce en relieve y agarraderas traseras de cuero" camera-controls touch-action="pan-y" camera-orbit="195deg 78deg 2.3m" camera-target="0m 0.56m 0m" min-camera-orbit="auto 20deg 1.3m" max-camera-orbit="auto 150deg 4m" field-of-view="30deg" exposure="1" shadow-intensity="0" shadow-softness="1" environment-image="neutral" interaction-prompt="none" loading="eager" reveal="auto">
+          <div slot="progress-bar" class="progress"><span id="progress-fill"></span></div>
+        </model-viewer>
+        <div id="load-error" class="error" hidden>No se pudo cargar el modelo. Recarga la página o descarga el GLB para revisarlo.</div>
+        <p class="stage-foot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8a9 9 0 0 1 15-2l2 2M21 3v5h-5M20 16a9 9 0 0 1-15 2l-2-2M3 21v-5h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Arrastra para girar · Desliza o usa la rueda para acercar</p>
+      </div>
+      <aside class="settings" aria-labelledby="settings-title">
+        <div><h2 id="settings-title">Hazlo a tu gusto</h2><p class="description">Cambia los materiales y observa el resultado al instante.</p></div>
         <div class="controls" aria-label="Modificar materiales">
           <button id="steel" disabled aria-pressed="false"><span class="swatch steel" aria-hidden="true"></span><span class="button-copy"><strong>Acero oscuro</strong><small id="steel-state">Acabado claro</small></span><span class="toggle" aria-hidden="true"></span></button>
           <button id="bronze" disabled aria-pressed="false"><span class="swatch bronze" aria-hidden="true"></span><span class="button-copy"><strong>Bronce envejecido</strong><small id="bronze-state">Acabado pulido</small></span><span class="toggle" aria-hidden="true"></span></button>
           <button id="normal" disabled aria-pressed="true"><span class="swatch relief" aria-hidden="true"></span><span class="button-copy"><strong>Relieve del bronce</strong><small id="normal-state">Detalle de superficie activo</small></span><span class="toggle" aria-hidden="true"></span></button>
         </div>
         <p id="live-state" class="sr-only" role="status" aria-live="polite"></p>
-      </div>
-      <div class="exhibit">
-        <div class="stage-label"><span>VISTA INTERACTIVA</span><span class="live-dot" id="load-label">CARGANDO</span></div>
-        <span class="halo" aria-hidden="true"></span>
-        <model-viewer id="shield" src="escudo.glb?v=2" poster="poster.webp" alt="Escudo medieval de madera roja con borde de acero, león de bronce en relieve y agarraderas traseras de cuero" camera-controls touch-action="pan-y" camera-orbit="195deg 78deg 2.3m" camera-target="0m 0.56m 0m" min-camera-orbit="auto 20deg 1.3m" max-camera-orbit="auto 150deg 4m" field-of-view="30deg" exposure="1" shadow-intensity="0" shadow-softness="1" environment-image="neutral" interaction-prompt="none" loading="eager" reveal="auto">
-          <div slot="progress-bar" class="progress"><span id="progress-fill"></span></div>
-        </model-viewer>
-        <div id="load-error" class="error" hidden>No se pudo cargar el modelo. Vuelve a cargar la página o descarga el GLB para revisarlo.</div>
-        <div class="stage-foot"><span class="orbit-icon" aria-hidden="true">↔</span> Arrastra para girar <span>·</span> Acerca con la rueda o con dos dedos</div>
-      </div>
+        <div class="material-note"><span class="note-label">Materiales</span><p>Madera roja, acero, bronce y cuero.</p></div>
+        <a class="download" href="escudo.glb?v=2" download="escudo_leon.glb"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar modelo<span>GLB · 2.27 MB</span></a>
+      </aside>
     </section>
-    <section class="specs" aria-label="Características del modelo">
-      <div><span class="spec-number">10,444</span><span class="spec-label">TRIÁNGULOS</span></div>
-      <div><span class="spec-number">04</span><span class="spec-label">MATERIALES PBR</span></div>
-      <div><span class="spec-number">512 px</span><span class="spec-label">RESOLUCIÓN DE TEXTURAS</span></div>
-      <a class="download" href="escudo.glb?v=2" download="escudo_leon.glb"><span>Descargar modelo<small>GLB · 2.27 MB</small></span><span aria-hidden="true">↗</span></a>
-    </section>
-    <details class="technical"><summary>Sobre la construcción del escudo <span aria-hidden="true">+</span></summary><div class="technical-grid"><p><strong>Cuatro superficies.</strong> Madera teñida de rojo en el cuerpo, acero en el marco y los remaches, bronce en el emblema y cuero en el respaldo y las agarraderas.</p><p><strong>Detalle sin geometría extra.</strong> El relieve fino del león se horneó desde el modelo de alta resolución. Cada material cuenta con Base Color, Roughness, Metallic y Normal; las islas UV están desplegadas.</p><p><strong>Preparado para web.</strong> Cuatro mallas, 0 n-gons y texturas incorporadas en el GLB. El visor utiliza <a href="https://modelviewer.dev/examples/scenegraph/" target="_blank" rel="noopener">model-viewer de Google</a> para modificar los materiales en tiempo real.</p></div></details>
+    <section class="specs" aria-label="Características del modelo"><div><strong>10,444</strong><span>Triángulos</span></div><div><strong>4 materiales</strong><span>Texturizado PBR</span></div><div><strong>512 px</strong><span>Resolución de texturas</span></div></section>
+    <details class="technical"><summary>Acerca del modelo<span aria-hidden="true">+</span></summary><p>Modelado en Blender con cuatro mallas, UVs desplegadas y 0 n-gons. Cada material incluye mapas de color, rugosidad, metalicidad y normales. El detalle fino del león se horneó desde una versión de alta resolución. El visor utiliza <a href="https://modelviewer.dev/" target="_blank" rel="noopener">model-viewer de Google</a>.</p></details>
   </main>
-  <footer><span>ARSENAL <span class="footer-dot">/</span> EL LEÓN CARMESÍ</span><span>MODELADO EN BLENDER · PBR · WEB 3D</span></footer>
+  <footer><span>Escudo medieval</span><span>Blender · model-viewer</span></footer>
 </body>
 </html>
-
